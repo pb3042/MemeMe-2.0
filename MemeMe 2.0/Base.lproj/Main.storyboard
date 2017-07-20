@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MemeEditorViewController-->
         <scene sceneID="LwJ-xi-Rxa">
             <objects>
-                <viewController id="A68-1f-uvE" customClass="ViewController" customModule="MemeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MemeEditorViewController" id="A68-1f-uvE" customClass="ViewController" customModule="MemeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m0h-d7-aeq"/>
                         <viewControllerLayoutGuide type="bottom" id="cll-ab-APh"/>
