@@ -6,10 +6,11 @@
 //  Copyright © 2017 Paul Brann. All rights reserved.
 //
 
+
 import UIKit
 
 class MemeCollectionViewCell: UICollectionViewCell {
-    
+    // outlet to collectionView
     @IBOutlet weak var collectionImageView: UIImageView!
     
 }
