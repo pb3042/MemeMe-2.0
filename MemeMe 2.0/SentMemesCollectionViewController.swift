@@ -7,11 +7,24 @@
 //
 
 import UIKit
+import Foundation
 
 private let reuseIdentifier = "Cell"
 
 class SentMemesCollectionViewController: UICollectionViewController {
-
+    
+    var memes: [Meme]!
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView?.reloadData()
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,11 +37,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     /*
     // MARK: - Navigation
 
@@ -49,17 +58,23 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return memes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
+        cell.collectionImageView?.image = memedImage
     
         // Configure the cell
     
         return cell
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+            controller.meme = self.memes[indexPath.item]
+            self.navigationController!.pushViewController(controller, animated: true)
+    }
     // MARK: UICollectionViewDelegate
 
     /*

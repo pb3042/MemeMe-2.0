@@ -10,17 +10,16 @@ import UIKit
 
 class MemeDetailViewController: UIViewController {
 
+    @IBOutlet weak var detailImageView: UIImageView!
+    
+    var meme: Meme!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        detailImageView.image = meme.memedImage
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
