@@ -11,6 +11,7 @@ import UIKit
 
 class MemeCollectionViewCell: UICollectionViewCell {
     // outlet to collectionView
-    @IBOutlet weak var collectionImageView: UIImageView!
     
+    
+    @IBOutlet weak var collectionImageView: UIImageView!
 }
