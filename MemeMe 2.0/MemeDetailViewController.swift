@@ -18,6 +18,10 @@ class MemeDetailViewController: UIViewController {
         super.viewDidLoad()
 
         detailImageView.image = meme.memedImage
+        
+        detailImageView.contentMode = .scaleAspectFit
+        
+        tabBarController?.tabBar.isHidden = true
     }
 
 

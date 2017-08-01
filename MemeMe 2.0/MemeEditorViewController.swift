@@ -114,19 +114,43 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
         }
     }
     
+    
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         let memedImage = generateMemedImage()
+        
         let activityViewController = UIActivityViewController(activityItems: [memedImage],applicationActivities: nil)
+        
         activityViewController.completionWithItemsHandler = {
-            (activity,completed, items, error) in
+            activity,completed, items, error in
             if completed {
-                self.save()
+                
+                self.save(memedImage: memedImage)
+                
                 self.dismiss(animated: true, completion: nil)
+                
+                self.navigationController!.popToRootViewController(animated: true)
+                
             }
         }
         
-        self.present(activityViewController, animated: true, completion: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
+    
+    func save(memedImage: UIImage) {
+        
+        let memedImage = generateMemedImage()
+        
+        let meme = Meme(topText: topTextBox.text!, bottomText: bottomTextBox.text!, originalImage: memeImageView.image, memedImage:memedImage)
+        
+        let object = UIApplication.shared.delegate
+        
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+        
+        
+    }
+    
     
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         memeImageView.image = nil
@@ -139,6 +163,8 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
         super.viewWillAppear(animated)
         cameraPicker.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         subscribeToKeyboardNotifications()
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -177,21 +203,9 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
     }
     
     
-    func save() {
-        let meme = Meme(topText: topTextBox.text!, bottomText: bottomTextBox.text!, originalImage: memeImageView.image!, memedImage: memedImage)
-        
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
     }
-}
 
-var topTextBox : String!
-var bottomTextBox : String!
-var originalImage : UIImage!
-var memedImage: UIImage!
 
 
 let topTextDefaultValue = "TOP"
 let bottomTextDefaultValue = "BOTTOM"
-

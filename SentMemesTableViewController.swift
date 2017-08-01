@@ -16,13 +16,21 @@ class SentMemesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        memes = appDelegate.memes
+        self.tabBarController?.tabBar.isHidden = false
+        
         tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -43,19 +51,17 @@ class SentMemesTableViewController: UITableViewController {
         let meme = memes[indexPath.row]
         cell.tableImageView.image = meme.memedImage
         
-        
         return cell
-        
-        
-
     }
     
-     func tableview(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memeView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
-        memeView.meme = self.memes[indexPath.row]
-        self.navigationController?.pushViewController(memeView, animated: true)
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let memeView = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as!
+            MemeDetailViewController
+        memeView.meme = memes[indexPath.row]
+        navigationController?.pushViewController(memeView, animated: true)
     }
-}
+    
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

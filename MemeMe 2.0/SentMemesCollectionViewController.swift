@@ -28,6 +28,8 @@ class SentMemesCollectionViewController: UICollectionViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         
+        self.tabBarController?.tabBar.isHidden = false
+        
         collectionView?.reloadData()
         
     }
@@ -65,7 +67,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
